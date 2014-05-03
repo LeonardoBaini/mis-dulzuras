@@ -1,4 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `misdulzuras` /*!40100 DEFAULT CHARACTER SET latin1 */;
+DROP SCHEMA IF EXISTS `misdulzuras`;
+CREATE DATABASE   `misdulzuras` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `misdulzuras`;
 -- MySQL dump 10.13  Distrib 5.5.16, for Win32 (x86)
 --
