@@ -57,13 +57,14 @@ public class QuitarDeStock extends JFrame {
 	    } 
 	    catch(Exception e){ 
 	    }
-	    jTableElementos.getTableHeader().setReorderingAllowed(false) ;
+	    
 		this.setSize(848, 347);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Muffin.png")));
 		this.setContentPane(getJContentPane());
 		this.setTitle("Quitar de Stock");
 		metodosSql metodos=new metodosSql();
 		metodos.llenarJtable(jTableElementos, "select * from materia_prima");
+		jTableElementos.getTableHeader().setReorderingAllowed(false) ;
 		
 	}
 
