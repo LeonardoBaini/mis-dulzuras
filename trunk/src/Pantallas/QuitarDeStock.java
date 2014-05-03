@@ -177,6 +177,9 @@ public class QuitarDeStock extends JFrame {
 					}catch(IllegalArgumentException i){
 						JOptionPane.showMessageDialog(null,"No hay más elementos a quitar, agregue alguno");
 						
+					}catch(Exception e1){
+						System.out.println(e1.getStackTrace());
+						
 					}
 					
 					
