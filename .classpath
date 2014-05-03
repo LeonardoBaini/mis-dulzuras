@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/hibernate3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/antlr-2.7.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/dom4j-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/hibernate-commons-annotations-4.0.1.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/hibernate-core-4.1.10.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/javassist-3.15.0-GA.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-release-4.1.10.Final/lib/required/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/hibernate-search-engine-4.2.0.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/hibernate-search-orm-4.2.0.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/antlr-2.7.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/avro-1.6.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/dom4j-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/hibernate-commons-annotations-4.0.1.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/hibernate-core-4.1.9.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/jackson-core-asl-1.9.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/javassist-3.17.1-GA.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/lucene-core-3.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/paranamer-2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/slf4j-api-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-search-4.2.0.Final-dist/hibernate-search-4.2.0.Final/dist/lib/required/snappy-java-1.0.4.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/mysql-connector-java-3.1.7-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/ant-1.6.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/ant-antlr-1.6.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/ant-junit-1.6.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/ant-launcher-1.6.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/antlr-2.7.6rc1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/ant-swing-1.6.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/asm.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/asm-attrs.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/c3p0-0.9.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/cglib-2.1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/cleanimports.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/commons-collections-2.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/concurrent-1.3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/connector.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/dom4j-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/ehcache-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jaas.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jacc-1_0-fr.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jaxen-1.1-beta-7.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jboss-cache.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jboss-common.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jboss-jmx.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jboss-system.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jdbc2_0-stdext.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jgroups-2.2.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/jta.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/junit-3.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/log4j-1.2.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/oscache-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/proxool-0.8.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/swarmcache-1.0rc2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/syndiag2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/versioncheck.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/xerces-2.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Librerías Java/Hibernate/hibernate-3.1/lib/xml-apis.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
