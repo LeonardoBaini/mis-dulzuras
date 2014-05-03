@@ -133,16 +133,20 @@ public class AgregarAStock extends JFrame {
 		if (jComboBoxNombresMatPrima == null) {
 			jComboBoxNombresMatPrima = new JComboBox<String>();
 			jComboBoxNombresMatPrima.setBounds(new Rectangle(5, 37, 348, 33));
-			jComboBoxNombresMatPrima.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+			
+			jComboBoxNombresMatPrima.addItemListener(new java.awt.event.ItemListener() {
+				public void itemStateChanged(java.awt.event.ItemEvent e) {
 					try{
-					MateriaPrima mat=new MateriaPrima();
-					String nombre=jComboBoxNombresMatPrima.getSelectedItem().toString();
-					mat=(MateriaPrima) Hibernate.dameObjeto(nombre, mat);
-					jLabelInfoStock.setText(String.valueOf(mat.getCantidad()+" "+mat.getUnidadMedida()));
-					}catch(Exception e1){
-						
-					}
+						if(jComboBoxNombresMatPrima.getSelectedItem()!=jComboBoxNombresMatPrima.getItemAt(0)){
+						MateriaPrima mat=new MateriaPrima();
+						String nombre=jComboBoxNombresMatPrima.getSelectedItem().toString();
+						mat=(MateriaPrima) Hibernate.dameObjeto(nombre, mat);
+						jLabelInfoStock.setText(String.valueOf(mat.getCantidad()+" "+mat.getUnidadMedida()));
+						}
+						}catch(Exception e1){
+							JOptionPane.showMessageDialog(null, "Error "+e1.getStackTrace());
+							e1.printStackTrace();
+						}
 				}
 			});
 		}

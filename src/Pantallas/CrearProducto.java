@@ -30,6 +30,7 @@ import javax.swing.ImageIcon;
 import persistencia.Hibernate;
 import java.awt.Toolkit;
 
+@SuppressWarnings("unused")
 public class CrearProducto extends JFrame {
 
 	private static final long serialVersionUID = 1L;
