@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="ObjetosPersistentes.Mostradorp" table="mostrador">
+<id name="id" column="idProducto">
+</id>
+
+
+<property name="nombre"/>
+<property name="fechaElaboracion" column="fecha_elaboracion"/>
+<property name="precio" column="precioVentaXunidad"/>
+<property name="dinero_a_reponer" column="dinero_a_reponer"/>
+
+
+</class>
+</hibernate-mapping>
