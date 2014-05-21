@@ -40,6 +40,7 @@ public class AgregarAStock extends JFrame {
 	private JLabel jLabelPrecio = null;
 	private JTextField jTextFieldPrecio = null;
 	private JButton jButtonSalir = null;
+	private JButton jButton = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -120,6 +121,7 @@ public class AgregarAStock extends JFrame {
 			jContentPane.add(jLabelPrecio, null);
 			jContentPane.add(getJTextFieldPrecio(), null);
 			jContentPane.add(getJButtonSalir(), null);
+			jContentPane.add(getJButton(), null);
 		}
 		return jContentPane;
 	}
@@ -335,6 +337,27 @@ public class AgregarAStock extends JFrame {
 			});
 		}
 		return jButtonSalir;
+	}
+
+	/**
+	 * This method initializes jButton	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getJButton() {
+		if (jButton == null) {
+			jButton = new JButton();
+			jButton.setBounds(new Rectangle(427, 115, 84, 72));
+			jButton.setText("233");
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					JOptionPane.showMessageDialog(null,"Hola");
+					
+					//System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
+		}
+		return jButton;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
