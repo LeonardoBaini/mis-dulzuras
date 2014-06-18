@@ -12,6 +12,7 @@
 <property name="unidadMedida"/>
 <property name="cantidad"/>
 <property name="precioXumedida"/>
+<property name="avisarCuandoCantidadsea"/>
 
 
 </class>

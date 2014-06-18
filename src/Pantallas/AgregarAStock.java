@@ -40,7 +40,9 @@ public class AgregarAStock extends JFrame {
 	private JLabel jLabelPrecio = null;
 	private JTextField jTextFieldPrecio = null;
 	private JButton jButtonSalir = null;
-	private JButton jButton = null;
+	private JLabel jLabeliNFOaVISO = null;
+	private JTextField jTextFieldAviso = null;
+	private JLabel jLabel = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -87,6 +89,12 @@ public class AgregarAStock extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabel = new JLabel();
+			jLabel.setBounds(new Rectangle(744, 89, 116, 34));
+			jLabel.setText("(Vacio es sin aviso)");
+			jLabeliNFOaVISO = new JLabel();
+			jLabeliNFOaVISO.setBounds(new Rectangle(367, 91, 270, 33));
+			jLabeliNFOaVISO.setText("TE AVISARÉ CUÁNDO TE QUEDE MENOS DE ->");
 			jLabelPrecio = new JLabel();
 			jLabelPrecio.setBounds(new Rectangle(10, 178, 161, 34));
 			jLabelPrecio.setText("Precio por U. de medida");
@@ -121,7 +129,9 @@ public class AgregarAStock extends JFrame {
 			jContentPane.add(jLabelPrecio, null);
 			jContentPane.add(getJTextFieldPrecio(), null);
 			jContentPane.add(getJButtonSalir(), null);
-			jContentPane.add(getJButton(), null);
+			jContentPane.add(jLabeliNFOaVISO, null);
+			jContentPane.add(getJTextFieldAviso(), null);
+			jContentPane.add(jLabel, null);
 		}
 		return jContentPane;
 	}
@@ -144,6 +154,7 @@ public class AgregarAStock extends JFrame {
 						String nombre=jComboBoxNombresMatPrima.getSelectedItem().toString();
 						mat=(MateriaPrima) Hibernate.dameObjeto(nombre, mat);
 						jLabelInfoStock.setText(String.valueOf(mat.getCantidad()+" "+mat.getUnidadMedida()));
+						jTextFieldAviso.setText(String.valueOf(mat.getAvisarCuandoCantidadsea()));
 						}
 						}catch(Exception e1){
 							JOptionPane.showMessageDialog(null, "Error "+e1.getStackTrace());
@@ -163,7 +174,7 @@ public class AgregarAStock extends JFrame {
 	private JTextField getJTextFieldCantidad() {
 		if (jTextFieldCantidad == null) {
 			jTextFieldCantidad = new JTextField();
-			jTextFieldCantidad.setBounds(new Rectangle(122, 94, 231, 29));
+			jTextFieldCantidad.setBounds(new Rectangle(122, 91, 231, 33));
 			jTextFieldCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyPressed(java.awt.event.KeyEvent e) {
 					if(e.getKeyChar()=='-'){
@@ -223,7 +234,7 @@ public class AgregarAStock extends JFrame {
 	private JComboBox<String> getJComboBoxUnidad() {
 		if (jComboBoxUnidad == null) {
 			jComboBoxUnidad = new JComboBox<String>();
-			jComboBoxUnidad.setBounds(new Rectangle(125, 132, 228, 36));
+			jComboBoxUnidad.setBounds(new Rectangle(125, 132, 228, 33));
 		}
 		return jComboBoxUnidad;
 	}
@@ -248,11 +259,17 @@ public class AgregarAStock extends JFrame {
 					String cantidad=jTextFieldCantidad.getText();
 					String unidadMedida=jComboBoxUnidad.getSelectedItem().toString();
 					String dinero=jTextFieldPrecio.getText();
+					String aviso=jTextFieldAviso.getText();
 					mat.setNombre(nombre);
 					mat=(MateriaPrima) Hibernate.dameObjeto(nombre, mat);
 					
 					mat.setCantidad(mat.getCantidad()+Float.parseFloat(cantidad));
 					mat.setUnidadMedida(unidadMedida);
+					if(!aviso.isEmpty()){
+					mat.setAvisarCuandoCantidadsea(Float.parseFloat(aviso));
+					}else{
+						mat.setAvisarCuandoCantidadsea(-1);
+					}
 					
 					if(mat.getPrecioXumedida()<Float.parseFloat(dinero))
 					mat.setPrecioXumedida(Float.parseFloat(dinero));
@@ -300,7 +317,7 @@ public class AgregarAStock extends JFrame {
 	private JTextField getJTextFieldPrecio() {
 		if (jTextFieldPrecio == null) {
 			jTextFieldPrecio = new JTextField();
-			jTextFieldPrecio.setBounds(new Rectangle(175, 178, 178, 34));
+			jTextFieldPrecio.setBounds(new Rectangle(175, 178, 178, 33));
 			jTextFieldPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyPressed(java.awt.event.KeyEvent e) {
 					if(e.getKeyChar()=='-'){
@@ -340,24 +357,16 @@ public class AgregarAStock extends JFrame {
 	}
 
 	/**
-	 * This method initializes jButton	
+	 * This method initializes jTextFieldAviso	
 	 * 	
-	 * @return javax.swing.JButton	
+	 * @return javax.swing.JTextField	
 	 */
-	private JButton getJButton() {
-		if (jButton == null) {
-			jButton = new JButton();
-			jButton.setBounds(new Rectangle(427, 115, 84, 72));
-			jButton.setText("233");
-			jButton.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					JOptionPane.showMessageDialog(null,"Hola");
-					
-					//System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
-				}
-			});
+	private JTextField getJTextFieldAviso() {
+		if (jTextFieldAviso == null) {
+			jTextFieldAviso = new JTextField();
+			jTextFieldAviso.setBounds(new Rectangle(651, 91, 89, 33));
 		}
-		return jButton;
+		return jTextFieldAviso;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

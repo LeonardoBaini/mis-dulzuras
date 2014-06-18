@@ -5,6 +5,7 @@
 <hibernate-mapping>
 <class name="ObjetosPersistentes.Mostradorp" table="mostrador">
 <id name="id" column="idProducto">
+<generator class="increment"/>
 </id>
 
 

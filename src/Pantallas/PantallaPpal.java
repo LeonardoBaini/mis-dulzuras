@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.Dimension;
@@ -11,7 +12,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Color;
 import javax.swing.JMenuItem;
+
+import Base.metodosSql;
+
 import java.awt.Toolkit;
+import java.sql.SQLException;
 
 @SuppressWarnings("unused")
 public class PantallaPpal extends JFrame {
@@ -28,6 +33,10 @@ public class PantallaPpal extends JFrame {
 	private JMenuItem jMenuItemMostrador = null;
 	private JMenuItem jMenuItemAgregarStock = null;
 	private JMenuItem jMenuItemQuitarStock = null;
+	private JMenuItem jMenuItemBalance = null;
+	private JMenu jMenuInicializar = null;
+	private JMenuItem jMenuItemInicializarTablas = null;
+	private JMenuItem jMenuItemSalir = null;
 
 	/**
 	 * This is the default constructor
@@ -83,6 +92,7 @@ public class PantallaPpal extends JFrame {
 			jJMenuBar.add(getJMenuVentas());
 			jJMenuBar.add(getJMenuStock());
 			jJMenuBar.add(getJMenuInformes());
+			jJMenuBar.add(getJMenuInicializar());
 		}
 		return jJMenuBar;
 	}
@@ -97,6 +107,7 @@ public class PantallaPpal extends JFrame {
 		if (jMenuArchivo == null) {
 			jMenuArchivo = new JMenu();
 			jMenuArchivo.setText("Archivo");
+			jMenuArchivo.add(getJMenuItemSalir());
 		}
 		return jMenuArchivo;
 	}
@@ -157,6 +168,7 @@ public class PantallaPpal extends JFrame {
 		if (jMenuInformes == null) {
 			jMenuInformes = new JMenu();
 			jMenuInformes.setText("Informes");
+			jMenuInformes.add(getJMenuItemBalance());
 		}
 		return jMenuInformes;
 	}
@@ -243,6 +255,114 @@ public class PantallaPpal extends JFrame {
 			});
 		}
 		return jMenuItemQuitarStock;
+	}
+
+
+	/**
+	 * This method initializes jMenuItemBalance	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemBalance() {
+		if (jMenuItemBalance == null) {
+			jMenuItemBalance = new JMenuItem();
+			jMenuItemBalance.setText("Balance mensual");
+			jMenuItemBalance.setBackground(Color.magenta);
+			jMenuItemBalance.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					InfoIngresos info=new InfoIngresos();
+					info.setLocationRelativeTo(null);
+					info.setVisible(true);
+				}
+			});
+		}
+		return jMenuItemBalance;
+	}
+
+
+	/**
+	 * This method initializes jMenuInicializar	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getJMenuInicializar() {
+		if (jMenuInicializar == null) {
+			jMenuInicializar = new JMenu();
+			jMenuInicializar.setText("Inicializar Base de Datos");
+			jMenuInicializar.add(getJMenuItemInicializarTablas());
+		}
+		return jMenuInicializar;
+	}
+
+
+	/**
+	 * This method initializes jMenuItemInicializarTablas	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemInicializarTablas() {
+		if (jMenuItemInicializarTablas == null) {
+			jMenuItemInicializarTablas = new JMenuItem();
+			jMenuItemInicializarTablas.setText("ESTA OPCIÓN BORRA TODOS LOS DATOS Y REGENERA LA BASE DE DATOS");
+			jMenuItemInicializarTablas
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							int preg1=0;
+							int preg2=0;
+							preg1=JOptionPane.showConfirmDialog(null,"Estás completamente segura?");
+							preg2=JOptionPane.showConfirmDialog(null,"Confirmámelo una vez más.");
+							if(preg1==0 && preg2==0){
+							metodosSql metodos=new metodosSql();
+							try {
+								metodos.insertarOmodif("drop table `misdulzuras`.`materia_prima`");
+								JOptionPane.showMessageDialog(null, "materia_prima BORRADO");
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try {
+								metodos.insertarOmodif("drop table `misdulzuras`.`mostrador`");
+								JOptionPane.showMessageDialog(null, "mostrador BORRADO");
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try {
+								metodos.insertarOmodif("drop table `misdulzuras`.`ventas`");
+								JOptionPane.showMessageDialog(null, "ventas BORRADO");
+								JOptionPane.showMessageDialog(null, "HAY QUE AGREGAR ALGO EN EL STOCK PARA REGENERAR LA BASE");
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							}else{
+								JOptionPane.showMessageDialog(null,"No hice ningún cambio");
+							}
+							
+						}
+					});
+		}
+		return jMenuItemInicializarTablas;
+	}
+
+
+	/**
+	 * This method initializes jMenuItemSalir	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemSalir() {
+		if (jMenuItemSalir == null) {
+			jMenuItemSalir = new JMenuItem();
+			jMenuItemSalir.setText("Salir");
+			jMenuItemSalir.setBackground(Color.magenta);
+			jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					dispose();
+				}
+			});
+		}
+		return jMenuItemSalir;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
