@@ -124,6 +124,20 @@ public class Hibernate {
 		
 		
 	}
+public static void test(){
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+			
+		session.beginTransaction();
+		
+		
+				
+		
+		
+		
+		
+	}
 	public static ArrayList<Object>DameListaDeObjetos(String select1ColumaDeIdFromTabla,Object objeto){
 		ArrayList<Object>objetos=new ArrayList<Object>();
 		ArrayList<String>primaryKeys=null;

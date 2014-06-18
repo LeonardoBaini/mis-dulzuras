@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.UIManager;
 
 import Base.metodosSql;
+import ObjetosPersistentes.MateriaPrima;
 import ObjetosPersistentes.Mostradorp;
 
 import java.awt.Color;
@@ -54,7 +55,6 @@ public class CrearProducto extends JFrame {
 	private JLabel jLabelCrearProducto = null;
 	private JButton jButtonUsarComoMat = null;
 	private JLabel jLabelFiltro = null;
-	private JButton jButtonFoto = null;
 	private JLabel jLabelFoto = null;
 	private JLabel jLabelNombre = null;
 	private JButton jButtonRefresh = null;
@@ -164,7 +164,6 @@ public class CrearProducto extends JFrame {
 			jContentPane.add(jLabelCrearProducto, null);
 			jContentPane.add(getJButtonUsarComoMat(), null);
 			jContentPane.add(jLabelFiltro, null);
-			jContentPane.add(getJButtonFoto(), null);
 			jContentPane.add(jLabelFoto, null);
 			jContentPane.add(jLabelNombre, null);
 			jContentPane.add(getJButtonRefresh(), null);
@@ -272,6 +271,48 @@ public class CrearProducto extends JFrame {
 		jTextFieldManoDeObra.setText(String.valueOf(manoObra));
 		jLabelSumaPrecioFinal.setText(String.valueOf(precioFinal));
 	}
+	
+	private int quitarDeStock(String nombre,double cantidad){
+		int status=0;
+		try{
+		double auxCant=0;
+		MateriaPrima mat = new MateriaPrima();
+		mat=(MateriaPrima) Hibernate.dameObjeto(nombre, mat);
+		auxCant=mat.getCantidad();
+		if(auxCant>=cantidad && cantidad >0){
+		mat.setCantidad(mat.getCantidad()- cantidad);
+		status=Hibernate.modificarObjeto(mat);
+		}else{
+			JOptionPane.showMessageDialog(null,"No hay tanta materia prima en el stock, hay que comprar más!");
+		}
+		}catch(Exception e1){
+			JOptionPane.showMessageDialog(null,"Verificá los datos que cargaste "+e1.getMessage());
+		}
+		return status;
+		
+		
+	}
+	private int agregarStock(String nombre,double cantidad){
+		
+		int status=0;
+		try{
+		double auxCant=0;
+		MateriaPrima mat = new MateriaPrima();
+		mat=(MateriaPrima) Hibernate.dameObjeto(nombre, mat);
+		auxCant=mat.getCantidad();
+		if(cantidad>0){
+		mat.setCantidad(mat.getCantidad()+ cantidad);
+		status=Hibernate.modificarObjeto(mat);
+		}
+		}catch(Exception e1){
+			JOptionPane.showMessageDialog(null,"Verificá los datos que cargaste "+e1.getMessage());
+		}
+		
+		return status;
+		
+		
+	}
+	
 	/**
 	 * This method initializes jButtonAgregar	
 	 * 	
@@ -287,6 +328,7 @@ public class CrearProducto extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					jTableProducto.getTableHeader().setReorderingAllowed(false) ;
 					String cantidad=JOptionPane.showInputDialog("Cantidad?");
+					
 					metodosSql metodos=new metodosSql();
 					ArrayList<String> fila=new ArrayList<String>();
 					int indice=jTableMateriales.getSelectedRow();
@@ -294,9 +336,15 @@ public class CrearProducto extends JFrame {
 					fila.add(cantidad);
 					fila.add((String) jTableMateriales.getValueAt(indice,jTableMateriales.getColumn("UNIDADMEDIDA").getModelIndex()));
 					fila.add((String) jTableMateriales.getValueAt(indice,jTableMateriales.getColumn("PRECIOXUMEDIDA").getModelIndex()));
-					matriz.add(fila);
-					metodos.llenarJtableSinConexion(jTableProducto, matriz, columnasNombre);
-					actualizarValores();
+					
+					if(quitarDeStock(fila.get(0), Double.parseDouble(fila.get(1)))==1){
+						matriz.add(fila);
+						metodos.llenarJtableSinConexion(jTableProducto, matriz, columnasNombre);					
+						actualizarValores();
+						jButtonRefresh.doClick();
+						
+					}
+					
 					
 				}
 			});
@@ -319,10 +367,14 @@ public class CrearProducto extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try{
 					int indice=jTableProducto.getSelectedRow();
+					String nombreProducto=matriz.get(indice).get(0);
+					String cantidad=matriz.get(indice).get(1);
 					matriz.remove(indice);
 					metodosSql metodos=new metodosSql();
 					metodos.llenarJtableSinConexion(jTableProducto, matriz, columnasNombre);
 					actualizarValores();
+					agregarStock(nombreProducto, Double.parseDouble(cantidad));
+					jButtonRefresh.doClick();
 					}catch(ArrayIndexOutOfBoundsException a){
 						JOptionPane.showMessageDialog(null,"Seleccione un elemento a quitar del producto");
 					}
@@ -353,7 +405,7 @@ public class CrearProducto extends JFrame {
 					float manoDeObra=precioFinal-subtotal;
 					float paraReponerEnMatPrima=subtotal/cantidadProductos;
 					metodosSql metodos=new metodosSql();
-					
+					int status=0;
 					for(int i=0;i<cantidadProductos;i++){
 						Mostradorp m=new Mostradorp();
 						
@@ -361,9 +413,18 @@ public class CrearProducto extends JFrame {
 						m.setNombre(nombreProducto);
 						m.setPrecio(precioUnitario);
 						m.setDinero_a_reponer(paraReponerEnMatPrima);
-						Hibernate.guardarObjeto(m);
+						status=status+Hibernate.guardarObjeto(m);
 						
 						
+					}
+					if(status==cantidadProductos){
+						JOptionPane.showMessageDialog(null,"Producto /s agregado /s al mostrador.");
+						
+						
+						
+						
+					}else{
+						JOptionPane.showMessageDialog(null,"No los pude guardar en mostrador... reintentá.");
 					}
 				}
 			});
@@ -406,22 +467,18 @@ public class CrearProducto extends JFrame {
 			jButtonUsarComoMat.setBounds(new Rectangle(522, 405, 211, 40));
 			jButtonUsarComoMat.setIcon(new ImageIcon(getClass().getResource("/iconos/Save.png")));
 			jButtonUsarComoMat.setText("Usar como materia prima");
+			jButtonUsarComoMat.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"Proximamente...");
+				
+				
+				
+				
+				
+				}
+			});
 		}
 		return jButtonUsarComoMat;
-	}
-
-	/**
-	 * This method initializes jButtonFoto	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getJButtonFoto() {
-		if (jButtonFoto == null) {
-			jButtonFoto = new JButton();
-			jButtonFoto.setBounds(new Rectangle(37, 407, 179, 40));
-			jButtonFoto.setText("Colocar Foto (Opcional)");
-		}
-		return jButtonFoto;
 	}
 
 	/**

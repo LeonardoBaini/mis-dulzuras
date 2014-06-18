@@ -14,11 +14,16 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 
 import Base.metodosSql;
+import ObjetosPersistentes.Mostradorp;
+import ObjetosPersistentes.Venta;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
+
+import persistencia.Hibernate;
+
 import java.awt.Toolkit;
 
 @SuppressWarnings("unused")
@@ -64,16 +69,20 @@ public class Mostrador extends JFrame {
 	    } 
 	    catch(Exception e){ 
 	    }
-		this.setSize(903, 359);
+		this.setSize(1127, 500);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Muffin.png")));
 		this.setContentPane(getJContentPane());
 		this.setTitle("Mostrador");
-		metodosSql metodos=new metodosSql();
-		metodos.llenarJtable(jTableMostrador, "select * from mostrador");
-		jTableMostrador.getTableHeader().setReorderingAllowed(false) ;
+		inicializarTabla();
 		
 	}
 
+	private void inicializarTabla(){
+		jTableMostrador.removeAll();
+		metodosSql metodos=new metodosSql();
+		metodos.llenarJtable(jTableMostrador, "select * from mostrador");
+		jTableMostrador.getTableHeader().setReorderingAllowed(false) ;
+	}
 	/**
 	 * This method initializes jContentPane
 	 * 
@@ -86,7 +95,7 @@ public class Mostrador extends JFrame {
 			jLabelReposiciones.setBounds(new Rectangle(166, 99, 154, 24));
 			jLabelGanancias = new JLabel();
 			jLabelGanancias.setText("");
-			jLabelGanancias.setBounds(new Rectangle(166, 73, 154, 22));
+			jLabelGanancias.setBounds(new Rectangle(166, 74, 154, 22));
 			jLabelReposicion = new JLabel();
 			jLabelReposicion.setText("Reposición");
 			jLabelReposicion.setBounds(new Rectangle(9, 100, 154, 23));
@@ -128,12 +137,18 @@ public class Mostrador extends JFrame {
 	private JScrollPane getJScrollPaneMostrador() {
 		if (jScrollPaneMostrador == null) {
 			jScrollPaneMostrador = new JScrollPane();
-			jScrollPaneMostrador.setBounds(new Rectangle(6, 35, 888, 131));
+			jScrollPaneMostrador.setBounds(new Rectangle(6, 35, 1014, 172));
 			jScrollPaneMostrador.setViewportView(getJTableMostrador());
 		}
 		return jScrollPaneMostrador;
 	}
 
+	private void borrarInfo(){
+		jLabelCantidadAcobrar.setText("");
+		jLabelCantElementos.setText("");
+		jLabelGanancias.setText("");
+		jLabelReposiciones.setText("");
+	}
 	private void darInfo(){
 		try{
 		float aCobrar=0;
@@ -189,14 +204,39 @@ public class Mostrador extends JFrame {
 	private JButton getJButtonVender() {
 		if (jButtonVender == null) {
 			jButtonVender = new JButton();
-			jButtonVender.setBounds(new Rectangle(14, 185, 175, 39));
+			jButtonVender.setBounds(new Rectangle(4, 303, 175, 39));
 			jButtonVender.setText("Vender");
 			jButtonVender.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					metodosSql metodos=new metodosSql();
+					String fechaHoy=metodos.dameFechaDeHoy();
 					int [] rows=jTableMostrador.getSelectedRows();
 					for(int i=0;i<rows.length;i++){
+						try{
+							int status=0;
+						Venta v=new Venta();
+						Mostradorp mostrador=new Mostradorp();
+						int idAborrar=0;
+						v.setCostoMateriaPrima(Double.parseDouble((String) jTableMostrador.getValueAt(i,jTableMostrador.getColumn("DINERO_A_REPONER").getModelIndex())));
+						v.setFechaVenta(fechaHoy);
+						v.setPrecio(Double.parseDouble((String) jTableMostrador.getValueAt(i,jTableMostrador.getColumn("PRECIOVENTAXUNIDAD").getModelIndex())));
+						v.setProducto((String) jTableMostrador.getValueAt(i,jTableMostrador.getColumn("NOMBRE").getModelIndex()));
+						idAborrar=Integer.parseInt((String) jTableMostrador.getValueAt(rows[i],jTableMostrador.getColumn("IDPRODUCTO").getModelIndex()));
+						status=Hibernate.guardarObjeto(v);
+						if(status==1){
+						mostrador=(Mostradorp) Hibernate.dameObjeto(idAborrar, mostrador);
+						Hibernate.borrarObjeto(mostrador);
+						inicializarTabla();
+						JOptionPane.showMessageDialog(null,"Producto/s vendido/s");
+						
+						}
 						System.out.println(rows[i]);
+						}catch(Exception e1){
+							
+						}
 					}
+					
+					borrarInfo();
 				}
 			});
 		}
@@ -211,8 +251,42 @@ public class Mostrador extends JFrame {
 	private JButton getJButtonMermar() {
 		if (jButtonMermar == null) {
 			jButtonMermar = new JButton();
-			jButtonMermar.setBounds(new Rectangle(14, 231, 175, 39));
+			jButtonMermar.setBounds(new Rectangle(3, 359, 175, 39));
 			jButtonMermar.setText("Mermar");
+			jButtonMermar.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					metodosSql metodos=new metodosSql();
+					String fechaHoy=metodos.dameFechaDeHoy();
+					int [] rows=jTableMostrador.getSelectedRows();
+					for(int i=0;i<rows.length;i++){
+						try{
+							int status=0;
+						Venta v=new Venta();
+						Mostradorp mostrador=new Mostradorp();
+						int idAborrar=0;
+						v.setCostoMateriaPrima(Double.parseDouble((String) jTableMostrador.getValueAt(i,jTableMostrador.getColumn("DINERO_A_REPONER").getModelIndex())));
+						v.setFechaVenta(fechaHoy);
+						v.setPrecio(0);
+						v.setProducto((String) jTableMostrador.getValueAt(i,jTableMostrador.getColumn("NOMBRE").getModelIndex())+"(MERMADO)");
+						idAborrar=Integer.parseInt((String) jTableMostrador.getValueAt(rows[i],jTableMostrador.getColumn("IDPRODUCTO").getModelIndex()));
+						status=Hibernate.guardarObjeto(v);
+						if(status==1){
+						mostrador=(Mostradorp) Hibernate.dameObjeto(idAborrar, mostrador);
+						Hibernate.borrarObjeto(mostrador);
+						inicializarTabla();
+						JOptionPane.showMessageDialog(null,"Producto/s MERMADO ");
+						
+						}
+						System.out.println(rows[i]);
+						}catch(Exception e1){
+							
+						}
+					}
+					
+					borrarInfo();
+				
+				}
+			});
 		}
 		return jButtonMermar;
 	}
@@ -226,7 +300,7 @@ public class Mostrador extends JFrame {
 		if (jPanelInfo == null) {
 			jPanelInfo = new JPanel();
 			jPanelInfo.setLayout(null);
-			jPanelInfo.setBounds(new Rectangle(556, 179, 331, 143));
+			jPanelInfo.setBounds(new Rectangle(777, 266, 331, 143));
 			jPanelInfo.setBackground(new Color(238, 221, 134));
 			jPanelInfo.setBorder(BorderFactory.createTitledBorder(null, "Info", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
 			jPanelInfo.add(jLabeleLEMENTOS, null);

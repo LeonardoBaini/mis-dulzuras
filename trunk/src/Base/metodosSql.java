@@ -390,6 +390,13 @@ public int llenarComboBox(JComboBox<String> desplegable,String consultaSQL) thro
 	
 	return fecha;
 	}
+	public String dameMesActual(){
+		 SimpleDateFormat formateador = new SimpleDateFormat("MM", new Locale("es_ES"));
+		 Date fechaDate = new Date();
+         String fecha=formateador.format(fechaDate);
+	
+	return fecha;
+	}
 	public String dameAnio(){
 		 SimpleDateFormat formateador = new SimpleDateFormat("yyyy", new Locale("es_ES"));
 		 Date fechaDate = new Date();
